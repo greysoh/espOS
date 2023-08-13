@@ -1,0 +1,1 @@
+print("Hello, ESP32 (running en da Python)~")
