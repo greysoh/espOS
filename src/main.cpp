@@ -6,6 +6,7 @@
 // Commands
 #include "echo.h"
 #include "js.h"
+#include "ls.h"
 
 #define SERIAL_TIMEOUT 10
 bool has_core_init = false;
@@ -15,7 +16,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   
   Serial.println("device_tree: CPU");
-  Serial.println("Trinity Environment v0.0.0-TEST2 is starting...");
+  Serial.println("espOS-v0.0.1 is starting...");
   Serial.setTimeout(SERIAL_TIMEOUT);
   
   bool fs_starter = SPIFFS.begin();
@@ -53,6 +54,11 @@ void loop() {
     EchoCommand::cmd(argv);
   } else if (argv[0] == "quickjs" || argv[0] == "qjs" || argv[0] == "js") {
     JSCommand::cmd(argv);
+  } else if (argv[0] == "ls") {
+    LSCommand::cmd(argv);
+  } else if (argv[0] == "reset" || argv[0] == "reboot") {
+    Serial.println("Rebooting...");
+    esp_restart();
   } else {
     Serial.println("Command not found");
   }
