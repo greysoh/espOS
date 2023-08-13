@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-class BaseCommand {
+class EchoCommand {
   public:
     static void cmd(String argv[10]);
 };
