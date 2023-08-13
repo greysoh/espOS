@@ -5,6 +5,7 @@
 
 // Commands
 #include "echo.h"
+#include "kilo.h"
 #include "js.h"
 #include "ls.h"
 
@@ -59,6 +60,8 @@ void loop() {
   } else if (argv[0] == "reset" || argv[0] == "reboot") {
     Serial.println("Rebooting...");
     esp_restart();
+  } else if (argv[0] == "kilo") {
+    KiloCommand::cmd(argv);
   } else {
     Serial.println("Command not found");
   }
