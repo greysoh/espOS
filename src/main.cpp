@@ -33,9 +33,10 @@ void setup() {
 }
 
 void loop() {
+  while (!has_core_init) delay(100);
+  
   // Yes, this probably eats ram for breakfast, lunch, and dinner. I currently do not care.
   Serial.print("$ ");
-
   String argv[10];
   
   for (int i = 0; i < 10; i++) {
@@ -46,7 +47,7 @@ void loop() {
       argv[i].replace(" ", "");
       break;
     } else if (argv[i].endsWith(" ") && i == 9) {
-      Serial.println("\nWARNING: You have reached the argument limit. Go back to Twitter.");
+      Serial.println("\nERROR: You have reached the argument limit. Running as-is...");
     }
 
     argv[i].replace(" ", "");
@@ -58,13 +59,13 @@ void loop() {
     JSCommand::cmd(argv);
   } else if (argv[0] == "ls") {
     LSCommand::cmd(argv);
-  } else if (argv[0] == "reset" || argv[0] == "reboot") {
-    Serial.println("Rebooting...");
-    esp_restart();
   } else if (argv[0] == "kilo") {
     KiloCommand::cmd(argv);
   } else if (argv[0] == "cat") {
     CatCommand::cmd(argv);
+  } else if (argv[0] == "reset" || argv[0] == "reboot") {
+    Serial.println("Rebooting...");
+    esp_restart();
   } else {
     Serial.println("Command not found");
   }
