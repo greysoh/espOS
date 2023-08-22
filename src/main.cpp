@@ -6,6 +6,7 @@
 // Commands
 #include "echo.h"
 #include "kilo.h"
+#include "cat.h"
 #include "js.h"
 #include "ls.h"
 
@@ -62,6 +63,8 @@ void loop() {
     esp_restart();
   } else if (argv[0] == "kilo") {
     KiloCommand::cmd(argv);
+  } else if (argv[0] == "cat") {
+    CatCommand::cmd(argv);
   } else {
     Serial.println("Command not found");
   }
