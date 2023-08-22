@@ -65,6 +65,7 @@ void loop() {
     CatCommand::cmd(argv);
   } else if (argv[0] == "reset" || argv[0] == "reboot") {
     Serial.println("Rebooting...");
+    digitalWrite(LED_BUILTIN, LOW);
     esp_restart();
   } else {
     Serial.println("Command not found");
