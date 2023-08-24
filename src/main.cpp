@@ -4,6 +4,7 @@
 #include "strfun.h"
 
 // Commands
+#include "tusbdrive.h"
 #include "echo.h"
 #include "kilo.h"
 #include "cat.h"
@@ -53,6 +54,8 @@ void loop() {
     argv[i].replace(" ", "");
   }
 
+  if (argv[0] == "") return;
+
   if (argv[0] == "echo") {
     EchoCommand::cmd(argv);
   } else if (argv[0] == "quickjs" || argv[0] == "qjs" || argv[0] == "js") {
@@ -63,6 +66,8 @@ void loop() {
     KiloCommand::cmd(argv);
   } else if (argv[0] == "cat") {
     CatCommand::cmd(argv);
+  } else if (argv[0] == "tusbdrive") {
+    TinyUSBCommand::cmd(argv);
   } else if (argv[0] == "reset" || argv[0] == "reboot") {
     Serial.println("Rebooting...");
     digitalWrite(LED_BUILTIN, LOW);
