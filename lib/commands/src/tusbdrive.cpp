@@ -24,12 +24,6 @@ void TinyUSBCommand::cmd(String argv[10]) {
       
       if (readData == "BITE") {
         hasBitten = true;
-          
-        // Upgrade connection to 921600 baud
-        //Serial.flush();
-        //Serial.end(); 
-        //Serial.begin(921600);
-          
         continue;
       } else if (readData.startsWith("list")) {
         String directoryItem = readData.substring(readData.indexOf(" ") + 1);
